@@ -446,3 +446,71 @@ extension UIButton {
         self.setAttributedTitle(attributedString, for: state)
     }
 }
+
+class TFTextViewTextPiece {
+    var title = ""
+    var value = ""
+    
+    
+    static func Create(with title: String, val : String) -> TFTextViewTextPiece {
+        let new = TFTextViewTextPiece()
+        
+        new.title = title
+        new.value = val
+        
+        return new
+    }
+    
+    static func CreateWithDate(_ title: String, date : Date) -> TFTextViewTextPiece {
+        
+        let new = TFTextViewTextPiece()
+        
+        new.title = title
+        new.value = PADateManager.sharedInstance.getDateString(date: date, formatType: .Pretty)
+        
+        return new
+    }
+}
+class TFTextViewTextGenerator {
+    
+    private lazy var mainText = ""
+    
+    private lazy var pieces = [TFTextViewTextPiece]()
+    
+    var MainDelimiter = "-------------"
+    var SubDelimiter = ":"
+    
+    func addPiece(with title: String, value : String) {
+        let new = TFTextViewTextPiece.Create(with: title, val: value)
+        
+        pieces.append(new)
+    }
+    
+    func addPiece(with title: String, and date : Date) {
+        let new = TFTextViewTextPiece.CreateWithDate(title, date: date)
+        
+        pieces.append(new)
+    }
+    
+    
+    func getString() -> String {
+        var str = ""
+        
+        str += "\n"
+        
+        
+        for piece in self.pieces {
+            
+            str += piece.title
+            str += self.SubDelimiter
+            str += "\n" + piece.value
+            str += "\n\n" + self.MainDelimiter + "\n\n"
+        }
+        
+        return str
+    }
+    
+    
+    
+    
+}

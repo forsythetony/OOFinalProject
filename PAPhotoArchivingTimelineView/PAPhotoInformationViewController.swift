@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TAPhotoInformationViewController: UIViewController {
+class PAPhotoInformationViewController: UIViewController {
 
     @IBOutlet weak var headerBarView: UIView!
     @IBOutlet weak var mainTableView: UITableView!
@@ -108,7 +108,7 @@ class TAPhotoInformationViewController: UIViewController {
 }
 
 
-extension TAPhotoInformationViewController : UITableViewDelegate, UITableViewDataSource {
+extension PAPhotoInformationViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -395,11 +395,9 @@ extension TAPhotoInformationViewController : UITableViewDelegate, UITableViewDat
             })
         }
     }
-    
-    
 }
 
-extension TAPhotoInformationViewController : PAPhotographDelegate {
+extension PAPhotoInformationViewController : PAPhotographDelegate {
  
     func PAPhotographDidFetchNewStory(story: PAStory) {
         
@@ -407,7 +405,7 @@ extension TAPhotoInformationViewController : PAPhotographDelegate {
     }
 }
 
-extension TAPhotoInformationViewController : PATextEditViewDelegate {
+extension PAPhotoInformationViewController : PATextEditViewDelegate {
     
     func showTextEditView( title : String, value : String ) {
         
@@ -443,7 +441,7 @@ extension TAPhotoInformationViewController : PATextEditViewDelegate {
     }
 }
 
-extension TAPhotoInformationViewController : PAAudioManagerDelegate {
+extension PAPhotoInformationViewController : PAAudioManagerDelegate {
     
     func PAAudioManagerDidBeginPlayingStory(story: PAStory) {
         self.audioPlayerControls.currentState = .Playing
@@ -478,7 +476,7 @@ extension TAPhotoInformationViewController : PAAudioManagerDelegate {
     
 }
 
-extension TAPhotoInformationViewController : PAAudioPlayerControlBarDelegate {
+extension PAPhotoInformationViewController : PAAudioPlayerControlBarDelegate {
     
     func PAAudioPlayerControlBarDidTapPlayPauseButton(_ bar: PAAudioPlayerControlBar) {
         

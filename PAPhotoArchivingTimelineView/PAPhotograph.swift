@@ -13,6 +13,22 @@ import Firebase
 
 class PAPhotograph {
     
+    private static let DEFAULT_UID                      = ""
+    private static let DEFAULT_TITLE                    = ""
+    private static let DEFAULT_LONG_DESCRIPTION         = ""
+    private static let DEFAULT_DATE_UPLOADED            = Date()
+    private static let DEFAULT_THUMB_URL                = ""
+    private static let DEFAULT_MAIN_URL                 = ""
+    private static let DEFAULT_DATE_TAKEN               = Date()
+    private static let DEFAULT_DATE_CONF : Float        = 0.0
+    private static let DEFAULT_LOC_LONGITUDE : CGFloat  = 0.0
+    private static let DEFAULT_LOC_LATITUDE : CGFloat   = 0.0
+    private static let DEFAULT_LOC_STREET               = "Any Street"
+    private static let DEFAULT_LOC_CITY                 = "Any City"
+    private static let DEFAULT_LOC_STATE                = "Any State"
+    private static let DEFAULT_LOC_COUNTRY              = "Any Country"
+    private static let DEFAULT_LOC_CONF : Float         = 0.0
+    
     var uid = ""
     var title = ""
     var longDescription = ""
@@ -30,14 +46,15 @@ class PAPhotograph {
     
     var delegate : PAPhotographDelegate?
     
-}
-
-protocol PAPhotographDelegate {
-    func PAPhotographDidFetchNewStory( story : PAStory )
-}
-
-extension PAPhotograph {
     
+    
+    /// Function Name:  fetchStories
+    /// 
+    /// Return Value:   Void
+    /// 
+    /// Description:    This function will pull all the stories for this photograph from
+    ///                 Firebase and alert the delegate upon each new story addition
+    ///
     func fetchStories() {
         
         let db_ref = FIRDatabase.database().reference()
@@ -47,66 +64,73 @@ extension PAPhotograph {
         let stories_ref = curr_photo_ref.child("stories")
         
         stories_ref.observe(.childAdded, with: { snapshot in
-         
+            
             if let new_story = PAStory.PAStoryFromSnapshot(snapshot: snapshot ) {
+                
                 self.stories.append(new_story)
                 self.delegate?.PAPhotographDidFetchNewStory(story: new_story)
+                
             }
-            
-            
         })
-        
-        
-        
-        
-        
     }
-}
-extension PAPhotograph {
     
-    
+    /// Function Name:  photographWithSnapshot
+    ///
+    /// Parameter 'snap':   The FIRDataSnapshot used to create the instance
+    ///
+    /// Return Value:       An instance of PAPhotograph created from the FIRDataSnapshot
+    ///                     or nil if no instance could be created
+    ///
     static func photographWithSnapshot( snap : FIRDataSnapshot ) -> PAPhotograph? {
         
         guard let snapData = snap.value as? Dictionary<String, AnyObject> else { return nil }
         
         let newPhoto = PAPhotograph()
         
-        newPhoto.title = snapData[Keys.Photograph.title] as? String ?? ""
+        newPhoto.title = snapData[Keys.Photograph.title] as? String ?? PAPhotograph.DEFAULT_TITLE
         
-        newPhoto.longDescription = snapData[Keys.Photograph.description] as? String ?? ""
-    
+        newPhoto.longDescription = snapData[Keys.Photograph.description] as? String ?? PAPhotograph.DEFAULT_LONG_DESCRIPTION
+        
         newPhoto.uid = snap.key
         
-        newPhoto.dateTakenConf = snapData[Keys.Photograph.dateTakenConf] as? Float ?? Float(0.1)
+        newPhoto.dateTakenConf = snapData[Keys.Photograph.dateTakenConf] as? Float ?? PAPhotograph.DEFAULT_DATE_CONF
         
         if let date_taken = snapData[Keys.Photograph.dateTaken] as? String {
             
             newPhoto.dateTaken = PADateManager.sharedInstance.getDateFromString(str: date_taken, formatType: .FirebaseFull)
         }
+        else {
+            newPhoto.dateTaken = PAPhotograph.DEFAULT_DATE_TAKEN
+            newPhoto.dateTakenConf = 0.0
+        }
         
-        newPhoto.mainImageURL = snapData[Keys.Photograph.mainURL] as? String ?? ""
-        newPhoto.thumbnailURL = snapData[Keys.Photograph.thumbURL] as? String ?? ""
+        newPhoto.mainImageURL = snapData[Keys.Photograph.mainURL] as? String ?? PAPhotograph.DEFAULT_MAIN_URL
+        newPhoto.thumbnailURL = snapData[Keys.Photograph.thumbURL] as? String ?? PAPhotograph.DEFAULT_THUMB_URL
         
         
         let location = PALocation()
         
-        let lattitude = snapData[Keys.Photograph.locationLattitude] as? CGFloat ?? CGFloat(0.0)
-        let longitude = snapData[Keys.Photograph.locationLongitude] as? CGFloat ?? CGFloat(0.0)
-        //let location_conf = snapData[Keys.Photograph.locationConf] as? Float ?? Float(0.0)
-        let location_city = snapData[Keys.Photograph.locationCity] as? String ?? "Any City"
-        let location_country = snapData[Keys.Photograph.locationCountry] as? String ?? "Any Country"
-        let location_state = snapData[Keys.Photograph.locationState] as? String ?? "Any State"
+        let lattitude = snapData[Keys.Photograph.locationLatitude]         as? CGFloat ?? PAPhotograph.DEFAULT_LOC_LATITUDE
+        let longitude = snapData[Keys.Photograph.locationLongitude]         as? CGFloat ?? PAPhotograph.DEFAULT_LOC_LONGITUDE
+        let location_city = snapData[Keys.Photograph.locationCity]          as? String ?? PAPhotograph.DEFAULT_LOC_CITY
+        let location_state = snapData[Keys.Photograph.locationState]        as? String ?? PAPhotograph.DEFAULT_LOC_STATE
+        let location_country = snapData[Keys.Photograph.locationCountry]    as? String ?? PAPhotograph.DEFAULT_LOC_COUNTRY
         
         location.coordinates = CLLocationCoordinate2D(latitude: CLLocationDegrees(lattitude), longitude: CLLocationDegrees(longitude))
-        location.city = location_city
-        location.country = location_country
-        location.state = location_state
+        
+        location.city       = location_city
+        location.state      = location_state
+        location.country    = location_country
         
         newPhoto.locationTaken = location
         
         return newPhoto
         
     }
+}
+
+protocol PAPhotographDelegate {
+    func PAPhotographDidFetchNewStory( story : PAStory )
 }
 
 

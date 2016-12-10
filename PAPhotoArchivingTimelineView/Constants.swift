@@ -31,7 +31,7 @@ struct Keys {
         static let title = "title"
         static let dateTakenConf = "date_taken_conf"
         static let locationLongitude = "location_coord_longitude"
-        static let locationLattitude = "location_coord_lattitude"
+        static let locationLatitude = "location_coord_lattitude"
         static let locationConf = "location_conf"
         static let locationCity = "location_city"
         static let locationCountry = "location_country"

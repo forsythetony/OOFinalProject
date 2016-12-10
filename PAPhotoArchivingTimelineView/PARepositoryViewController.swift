@@ -31,7 +31,7 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         chromecaster.delegate = self
-        
+        self.setupInfoButton()
         
     }
     
@@ -98,7 +98,7 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
             case Constants.SegueIDs.ToPhotoInformation:
                 if let photoInfo = sender as? PAPhotograph {
                     
-                    let dest = segue.destination as! TAPhotoInformationViewController
+                    let dest = segue.destination as! PAPhotoInformationViewController
                     
                     dest.photoInfo = photoInfo
                 }
@@ -116,6 +116,27 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
     
     func didFindNewDevice(device: GCKDevice) {
         self.showAlertViewWithDevice(device: device)
+    }
+    
+    
+    
+    private func setupInfoButton() {
+        
+        let btnImg = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
+        
+        
+        
+        let btn = UIBarButtonItem(image: btnImg, style: .plain, target: self, action: #selector(self.didTapAboutInfo(sender:)))
+        
+        self.navigationItem.rightBarButtonItem = btn
+    }
+    
+    func didTapAboutInfo( sender : UIBarButtonItem ) {
+        
+        let infoController = PAAboutPageViewController()
+        
+        self.present(infoController, animated: true, completion: nil)
+        
     }
 
 }

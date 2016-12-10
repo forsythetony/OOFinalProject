@@ -18,7 +18,7 @@
 		2568E9E11DD27DC900FE911E /* ContentAddSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */; };
 		2568E9E31DD281A300FE911E /* PADataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9E21DD281A300FE911E /* PADataManager.swift */; };
 		2568E9E71DD28B7B00FE911E /* PATimelineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9E61DD28B7B00FE911E /* PATimelineManager.swift */; };
-		2583CA4B1DD38003004711DC /* TAPhotoInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583CA4A1DD38003004711DC /* TAPhotoInformationViewController.swift */; };
+		2583CA4B1DD38003004711DC /* PAPhotoInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583CA4A1DD38003004711DC /* PAPhotoInformationViewController.swift */; };
 		2583CA4E1DD387D0004711DC /* TFPhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583CA4D1DD387D0004711DC /* TFPhotoInfo.swift */; };
 		2583CA501DD3B546004711DC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2583CA4F1DD3B546004711DC /* CoreLocation.framework */; };
 		2583CA521DD3B5D2004711DC /* PAPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583CA511DD3B5D2004711DC /* PAPerson.swift */; };
@@ -54,6 +54,7 @@
 		25EC9C7F1DFB7BBB00C30604 /* PARepositoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EC9C7E1DFB7BBB00C30604 /* PARepositoryCollectionViewCell.swift */; };
 		25EC9C811DFB8A0500C30604 /* PARepositoriesContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EC9C801DFB8A0500C30604 /* PARepositoriesContainer.swift */; };
 		25EC9C841DFBADFB00C30604 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 25EC9C831DFBADFB00C30604 /* UIImage+ImageEffects.m */; };
+		25EC9C861DFBE01A00C30604 /* PAAboutPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EC9C851DFBE01A00C30604 /* PAAboutPageViewController.swift */; };
 		33B4360600DA7A14E6FA6545 /* Pods_PAPhotoArchivingTimelineViewUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B184F863C949FF0663A20DCE /* Pods_PAPhotoArchivingTimelineViewUITests.framework */; };
 		8F3AC47D254722331AE32DC5 /* Pods_PAPhotoArchivingTimelineView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45CFA5D02464BCB7876B0498 /* Pods_PAPhotoArchivingTimelineView.framework */; };
 /* End PBXBuildFile section */
@@ -82,7 +83,7 @@
 		2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentAddSelectorViewController.swift; sourceTree = "<group>"; };
 		2568E9E21DD281A300FE911E /* PADataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PADataManager.swift; sourceTree = "<group>"; };
 		2568E9E61DD28B7B00FE911E /* PATimelineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PATimelineManager.swift; sourceTree = "<group>"; };
-		2583CA4A1DD38003004711DC /* TAPhotoInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TAPhotoInformationViewController.swift; sourceTree = "<group>"; };
+		2583CA4A1DD38003004711DC /* PAPhotoInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotoInformationViewController.swift; sourceTree = "<group>"; };
 		2583CA4D1DD387D0004711DC /* TFPhotoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TFPhotoInfo.swift; sourceTree = "<group>"; };
 		2583CA4F1DD3B546004711DC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2583CA511DD3B5D2004711DC /* PAPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPerson.swift; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 		25EC9C801DFB8A0500C30604 /* PARepositoriesContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PARepositoriesContainer.swift; sourceTree = "<group>"; };
 		25EC9C821DFBADFB00C30604 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		25EC9C831DFBADFB00C30604 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		25EC9C851DFBE01A00C30604 /* PAAboutPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAAboutPageViewController.swift; sourceTree = "<group>"; };
 		38FA2E907F510E51B8FC8E0F /* Pods-PAPhotoArchivingTimelineView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PAPhotoArchivingTimelineView.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PAPhotoArchivingTimelineView/Pods-PAPhotoArchivingTimelineView.debug.xcconfig"; sourceTree = "<group>"; };
 		45CFA5D02464BCB7876B0498 /* Pods_PAPhotoArchivingTimelineView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PAPhotoArchivingTimelineView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		76714CFBC854414433CB05D6 /* Pods-PAPhotoArchivingTimelineViewUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PAPhotoArchivingTimelineViewUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PAPhotoArchivingTimelineViewUITests/Pods-PAPhotoArchivingTimelineViewUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,7 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				255C4F031DE9120400EBD24C /* PAMainImageViewController.swift */,
-				2583CA4A1DD38003004711DC /* TAPhotoInformationViewController.swift */,
+				2583CA4A1DD38003004711DC /* PAPhotoInformationViewController.swift */,
 				2583CA4D1DD387D0004711DC /* TFPhotoInfo.swift */,
 				2583CA5B1DD3C727004711DC /* PAPhotoInfoRegularTableViewCell.swift */,
 				255C4F051DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift */,
@@ -210,6 +212,7 @@
 				2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */,
 				25D87D0B1DE9DAC9000D2160 /* PAAutoLayoutExtension.swift */,
 				25D87D101DE9FDC8000D2160 /* PAPhotoArchivingTimelineView-Bridging-Header.h */,
+				25EC9C851DFBE01A00C30604 /* PAAboutPageViewController.swift */,
 			);
 			path = PAPhotoArchivingTimelineView;
 			sourceTree = "<group>";
@@ -522,6 +525,7 @@
 				2568E9E71DD28B7B00FE911E /* PATimelineManager.swift in Sources */,
 				25D87D061DE9C085000D2160 /* PATextEditView.swift in Sources */,
 				2583CA5C1DD3C727004711DC /* PAPhotoInfoRegularTableViewCell.swift in Sources */,
+				25EC9C861DFBE01A00C30604 /* PAAboutPageViewController.swift in Sources */,
 				2583CA521DD3B5D2004711DC /* PAPerson.swift in Sources */,
 				2568E9E31DD281A300FE911E /* PADataManager.swift in Sources */,
 				2583CA581DD3B748004711DC /* PARepository.swift in Sources */,
@@ -539,7 +543,7 @@
 				25EC9C841DFBADFB00C30604 /* UIImage+ImageEffects.m in Sources */,
 				25D87CFC1DE98BA5000D2160 /* PAAudioPlayerControlBar.swift in Sources */,
 				25D87D021DE993BE000D2160 /* PAFileManager.swift in Sources */,
-				2583CA4B1DD38003004711DC /* TAPhotoInformationViewController.swift in Sources */,
+				2583CA4B1DD38003004711DC /* PAPhotoInformationViewController.swift in Sources */,
 				25D87D001DE99393000D2160 /* PAAudioManager.swift in Sources */,
 				2506A2261DD2ABB00033EEDD /* PAIncrementView.swift in Sources */,
 				25EC9C7D1DFB7A6700C30604 /* PARepositoriesViewController.swift in Sources */,

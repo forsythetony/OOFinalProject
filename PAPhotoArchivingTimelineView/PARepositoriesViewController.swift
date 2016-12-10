@@ -84,7 +84,7 @@ class PARepositoriesViewController: UIViewController {
         self.dataSetup()
         self.setupCollectionView()
         self.setupImageView()
-//        self.updateBlur()
+        self.setupInfoButton()
         
     }
 
@@ -98,6 +98,25 @@ class PARepositoriesViewController: UIViewController {
         self.dataMan.delegate = self
         
         self.dataMan.configure()
+    }
+    
+    private func setupInfoButton() {
+        
+        let btnImg = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
+        
+        
+        
+        let btn = UIBarButtonItem(image: btnImg, style: .plain, target: self, action: #selector(self.didTapAboutInfo(sender:)))
+        
+        self.navigationItem.rightBarButtonItem = btn
+    }
+    
+    func didTapAboutInfo( sender : UIBarButtonItem ) {
+        
+        let infoController = PAAboutPageViewController()
+        
+        self.present(infoController, animated: true, completion: nil)
+        
     }
     
     private func setupImageView() {
@@ -122,26 +141,6 @@ class PARepositoriesViewController: UIViewController {
         blurView.frame = backgroundImageView.bounds
         
         backgroundImageView.addSubview(blurView)
-        
-        /*
-        var frm = self.view.frame
-        frm.PASetOriginToZero()
-        
-        
-        backgroundImageView.frame = frm
-        backgroundImageView.contentMode = .center
-        backgroundImageView.image = UIImage(named: "main_background")
-        
-        
-        blurredBackgroundImageView.frame = frm
-        blurredBackgroundImageView.alpha = 0.0
-        
-        
-        self.view.addSubview(backgroundImageView)
-        self.view.addSubview(blurredBackgroundImageView)
-        
-        self.view.sendSubview(toBack: backgroundImageView)
- */
         
     }
     private func setupCollectionView() {

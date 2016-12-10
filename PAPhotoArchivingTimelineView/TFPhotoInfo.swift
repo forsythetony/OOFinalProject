@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 import CoreLocation
 
-protocol PAPhotoInfoClassType {
-    
-}
-
 enum PAPhotoInfoType {
     case Text
     case LongText
@@ -24,7 +20,7 @@ enum PAPhotoInfoType {
     case Unknown
 }
 
-class PAPhotoInfo : PAPhotoInfoClassType {
+class PAPhotoInfo  {
     
     var title = ""
     var uid = ""
