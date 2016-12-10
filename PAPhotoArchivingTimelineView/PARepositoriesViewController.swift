@@ -173,7 +173,7 @@ class PARepositoriesViewController: UIViewController {
             }
             
             
-            let dest = segue.destination as! ViewController
+            let dest = segue.destination as! PARepositoryViewController
             
             dest.currentRepository = selectedRepository
             

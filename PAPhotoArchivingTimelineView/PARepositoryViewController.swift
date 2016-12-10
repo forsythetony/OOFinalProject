@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController, PAChromeCasterDelegate {
+class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
 
     var ref : FIRDatabaseReference!
     var repositories : [FIRDataSnapshot]! = []
@@ -120,7 +120,7 @@ class ViewController: UIViewController, PAChromeCasterDelegate {
 
 }
 
-extension ViewController : PATimelineViewDelegate {
+extension PARepositoryViewController: PATimelineViewDelegate {
     
     func PATimelineViewPhotographWasTapped(info: PAPhotograph) {
         

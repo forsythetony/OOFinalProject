@@ -28,7 +28,7 @@
 		2583CA5A1DD3B7F1004711DC /* PAStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583CA591DD3B7F1004711DC /* PAStory.swift */; };
 		2583CA5C1DD3C727004711DC /* PAPhotoInfoRegularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583CA5B1DD3C727004711DC /* PAPhotoInfoRegularTableViewCell.swift */; };
 		25D03BA61DC19DAE00045988 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D03BA51DC19DAE00045988 /* AppDelegate.swift */; };
-		25D03BA81DC19DAE00045988 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D03BA71DC19DAE00045988 /* ViewController.swift */; };
+		25D03BA81DC19DAE00045988 /* PARepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D03BA71DC19DAE00045988 /* PARepositoryViewController.swift */; };
 		25D03BAB1DC19DAE00045988 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D03BA91DC19DAE00045988 /* Main.storyboard */; };
 		25D03BAD1DC19DAE00045988 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25D03BAC1DC19DAE00045988 /* Assets.xcassets */; };
 		25D03BB01DC19DAE00045988 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25D03BAE1DC19DAE00045988 /* LaunchScreen.storyboard */; };
@@ -93,7 +93,7 @@
 		2583CA5B1DD3C727004711DC /* PAPhotoInfoRegularTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotoInfoRegularTableViewCell.swift; sourceTree = "<group>"; };
 		25D03BA21DC19DAE00045988 /* PAPhotoArchivingTimelineView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PAPhotoArchivingTimelineView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25D03BA51DC19DAE00045988 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		25D03BA71DC19DAE00045988 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		25D03BA71DC19DAE00045988 /* PARepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PARepositoryViewController.swift; sourceTree = "<group>"; };
 		25D03BAA1DC19DAE00045988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		25D03BAC1DC19DAE00045988 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		25D03BAF1DC19DAE00045988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -199,15 +199,15 @@
 				25D03BC51DC19EB100045988 /* Data Entities */,
 				25D03BC81DC19F9200045988 /* Timeline View */,
 				25D03BA51DC19DAE00045988 /* AppDelegate.swift */,
-				25D03BA71DC19DAE00045988 /* ViewController.swift */,
+				25D03BA71DC19DAE00045988 /* PARepositoryViewController.swift */,
 				25D03BA91DC19DAE00045988 /* Main.storyboard */,
 				25D03BAC1DC19DAE00045988 /* Assets.xcassets */,
+				250B3A2D1DE8FB70002CE391 /* PAApplicationImages.xcassets */,
 				25D03BAE1DC19DAE00045988 /* LaunchScreen.storyboard */,
 				25D03BB11DC19DAE00045988 /* Info.plist */,
 				2568E9DE1DD27D5100FE911E /* Constants.swift */,
 				250B3A2B1DE8EF91002CE391 /* Helpers.swift */,
 				2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */,
-				250B3A2D1DE8FB70002CE391 /* PAApplicationImages.xcassets */,
 				25D87D0B1DE9DAC9000D2160 /* PAAutoLayoutExtension.swift */,
 				25D87D101DE9FDC8000D2160 /* PAPhotoArchivingTimelineView-Bridging-Header.h */,
 			);
@@ -514,7 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25D03BA81DC19DAE00045988 /* ViewController.swift in Sources */,
+				25D03BA81DC19DAE00045988 /* PARepositoryViewController.swift in Sources */,
 				25D03BC71DC19EC500045988 /* PARepositoryInfo.swift in Sources */,
 				25D03BCA1DC19FAB00045988 /* PATimelineView.swift in Sources */,
 				255C4F041DE9120400EBD24C /* PAMainImageViewController.swift in Sources */,
