@@ -10,7 +10,7 @@
 		2506A2261DD2ABB00033EEDD /* PAIncrementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506A2251DD2ABB00033EEDD /* PAIncrementView.swift */; };
 		2506A2281DD2BE940033EEDD /* PAPhotographCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506A2271DD2BE940033EEDD /* PAPhotographCell.swift */; };
 		250B3A2C1DE8EF91002CE391 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250B3A2B1DE8EF91002CE391 /* Helpers.swift */; };
-		250B3A2E1DE8FB70002CE391 /* PlaceholderImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250B3A2D1DE8FB70002CE391 /* PlaceholderImages.xcassets */; };
+		250B3A2E1DE8FB70002CE391 /* PAApplicationImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250B3A2D1DE8FB70002CE391 /* PAApplicationImages.xcassets */; };
 		255C4F041DE9120400EBD24C /* PAMainImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C4F031DE9120400EBD24C /* PAMainImageViewController.swift */; };
 		255C4F061DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C4F051DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift */; };
 		2568E9DD1DD27CB200FE911E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2568E9DC1DD27CB200FE911E /* GoogleService-Info.plist */; };
@@ -74,7 +74,7 @@
 		2506A2251DD2ABB00033EEDD /* PAIncrementView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAIncrementView.swift; sourceTree = "<group>"; };
 		2506A2271DD2BE940033EEDD /* PAPhotographCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotographCell.swift; sourceTree = "<group>"; };
 		250B3A2B1DE8EF91002CE391 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
-		250B3A2D1DE8FB70002CE391 /* PlaceholderImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PlaceholderImages.xcassets; sourceTree = "<group>"; };
+		250B3A2D1DE8FB70002CE391 /* PAApplicationImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PAApplicationImages.xcassets; sourceTree = "<group>"; };
 		255C4F031DE9120400EBD24C /* PAMainImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMainImageViewController.swift; sourceTree = "<group>"; };
 		255C4F051DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotoInfoDateTableViewCell.swift; sourceTree = "<group>"; };
 		2568E9DC1DD27CB200FE911E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -207,7 +207,7 @@
 				2568E9DE1DD27D5100FE911E /* Constants.swift */,
 				250B3A2B1DE8EF91002CE391 /* Helpers.swift */,
 				2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */,
-				250B3A2D1DE8FB70002CE391 /* PlaceholderImages.xcassets */,
+				250B3A2D1DE8FB70002CE391 /* PAApplicationImages.xcassets */,
 				25D87D0B1DE9DAC9000D2160 /* PAAutoLayoutExtension.swift */,
 				25D87D101DE9FDC8000D2160 /* PAPhotoArchivingTimelineView-Bridging-Header.h */,
 			);
@@ -400,7 +400,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25D03BB01DC19DAE00045988 /* LaunchScreen.storyboard in Resources */,
-				250B3A2E1DE8FB70002CE391 /* PlaceholderImages.xcassets in Resources */,
+				250B3A2E1DE8FB70002CE391 /* PAApplicationImages.xcassets in Resources */,
 				2568E9DD1DD27CB200FE911E /* GoogleService-Info.plist in Resources */,
 				25D03BAD1DC19DAE00045988 /* Assets.xcassets in Resources */,
 				25D03BAB1DC19DAE00045988 /* Main.storyboard in Resources */,
