@@ -1,9 +1,11 @@
 # Final Project - Object Oriented Programming (CS3380)
 
-##  Services/Libraries Used
-- Firebase
-
 ##  Overview
+### Application Information
+- Written In: Swift 3
+- IED:XCode 8.1
+- Tested On: iOS Simulator iPhone 7
 
-##  Demos
 
+###  Services/Libraries Used
+- Firebase
