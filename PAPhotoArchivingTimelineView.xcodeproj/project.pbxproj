@@ -17,7 +17,6 @@
 		2568E9DF1DD27D5100FE911E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9DE1DD27D5100FE911E /* Constants.swift */; };
 		2568E9E11DD27DC900FE911E /* ContentAddSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */; };
 		2568E9E31DD281A300FE911E /* PADataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9E21DD281A300FE911E /* PADataManager.swift */; };
-		2568E9E51DD2843600FE911E /* fake_repositories.json in Resources */ = {isa = PBXBuildFile; fileRef = 2568E9E41DD2843600FE911E /* fake_repositories.json */; };
 		2568E9E71DD28B7B00FE911E /* PATimelineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9E61DD28B7B00FE911E /* PATimelineManager.swift */; };
 		2583CA4B1DD38003004711DC /* TAPhotoInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583CA4A1DD38003004711DC /* TAPhotoInformationViewController.swift */; };
 		2583CA4E1DD387D0004711DC /* TFPhotoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2583CA4D1DD387D0004711DC /* TFPhotoInfo.swift */; };
@@ -82,7 +81,6 @@
 		2568E9DE1DD27D5100FE911E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentAddSelectorViewController.swift; sourceTree = "<group>"; };
 		2568E9E21DD281A300FE911E /* PADataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PADataManager.swift; sourceTree = "<group>"; };
-		2568E9E41DD2843600FE911E /* fake_repositories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fake_repositories.json; sourceTree = "<group>"; };
 		2568E9E61DD28B7B00FE911E /* PATimelineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PATimelineManager.swift; sourceTree = "<group>"; };
 		2583CA4A1DD38003004711DC /* TAPhotoInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TAPhotoInformationViewController.swift; sourceTree = "<group>"; };
 		2583CA4D1DD387D0004711DC /* TFPhotoInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TFPhotoInfo.swift; sourceTree = "<group>"; };
@@ -209,7 +207,6 @@
 				2568E9DE1DD27D5100FE911E /* Constants.swift */,
 				250B3A2B1DE8EF91002CE391 /* Helpers.swift */,
 				2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */,
-				2568E9E41DD2843600FE911E /* fake_repositories.json */,
 				250B3A2D1DE8FB70002CE391 /* PlaceholderImages.xcassets */,
 				25D87D0B1DE9DAC9000D2160 /* PAAutoLayoutExtension.swift */,
 				25D87D101DE9FDC8000D2160 /* PAPhotoArchivingTimelineView-Bridging-Header.h */,
@@ -405,7 +402,6 @@
 				25D03BB01DC19DAE00045988 /* LaunchScreen.storyboard in Resources */,
 				250B3A2E1DE8FB70002CE391 /* PlaceholderImages.xcassets in Resources */,
 				2568E9DD1DD27CB200FE911E /* GoogleService-Info.plist in Resources */,
-				2568E9E51DD2843600FE911E /* fake_repositories.json in Resources */,
 				25D03BAD1DC19DAE00045988 /* Assets.xcassets in Resources */,
 				25D03BAB1DC19DAE00045988 /* Main.storyboard in Resources */,
 			);
