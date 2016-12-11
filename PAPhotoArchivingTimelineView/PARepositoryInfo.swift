@@ -169,4 +169,21 @@ extension PARepositoryInfo {
     }
     
 }
+
+enum PADateFallState {
+    case After, Before, Inside, Unknown
+}
+extension PARepository {
+    
+    func whereDoesPhotoFall( photo : PAPhotograph ) -> PADateFallState {
+        
+        guard let pDate = photo.dateTaken, let sDate = self.startDate, let eDate = self.endDate else { return .Unknown }
+        
+        if pDate.isInRange(rangeStart: sDate, rangeEnd: eDate) { return .Inside }
+        
+        if pDate.isBeforeDate(date: sDate) { return .Before }
+        
+        return .After
+    }
+}
 //  MARK: Extensions

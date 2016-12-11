@@ -11,6 +11,8 @@
 		2506A2281DD2BE940033EEDD /* PAPhotographCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2506A2271DD2BE940033EEDD /* PAPhotographCell.swift */; };
 		250B3A2C1DE8EF91002CE391 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250B3A2B1DE8EF91002CE391 /* Helpers.swift */; };
 		250B3A2E1DE8FB70002CE391 /* PAApplicationImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 250B3A2D1DE8FB70002CE391 /* PAApplicationImages.xcassets */; };
+		2539ED5C1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2539ED5A1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodeld */; };
+		2539ED5E1DFBFA23008B7D38 /* PAPhotoUploadForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2539ED5D1DFBFA23008B7D38 /* PAPhotoUploadForm.swift */; };
 		255C4F041DE9120400EBD24C /* PAMainImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C4F031DE9120400EBD24C /* PAMainImageViewController.swift */; };
 		255C4F061DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C4F051DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift */; };
 		2568E9DD1DD27CB200FE911E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2568E9DC1DD27CB200FE911E /* GoogleService-Info.plist */; };
@@ -76,6 +78,8 @@
 		2506A2271DD2BE940033EEDD /* PAPhotographCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotographCell.swift; sourceTree = "<group>"; };
 		250B3A2B1DE8EF91002CE391 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		250B3A2D1DE8FB70002CE391 /* PAApplicationImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PAApplicationImages.xcassets; sourceTree = "<group>"; };
+		2539ED5B1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PAPhotoArchivingModel.xcdatamodel; sourceTree = "<group>"; };
+		2539ED5D1DFBFA23008B7D38 /* PAPhotoUploadForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotoUploadForm.swift; sourceTree = "<group>"; };
 		255C4F031DE9120400EBD24C /* PAMainImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMainImageViewController.swift; sourceTree = "<group>"; };
 		255C4F051DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotoInfoDateTableViewCell.swift; sourceTree = "<group>"; };
 		2568E9DC1DD27CB200FE911E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 				25D87D0B1DE9DAC9000D2160 /* PAAutoLayoutExtension.swift */,
 				25D87D101DE9FDC8000D2160 /* PAPhotoArchivingTimelineView-Bridging-Header.h */,
 				25EC9C851DFBE01A00C30604 /* PAAboutPageViewController.swift */,
+				2539ED5A1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodeld */,
+				2539ED5D1DFBFA23008B7D38 /* PAPhotoUploadForm.swift */,
 			);
 			path = PAPhotoArchivingTimelineView;
 			sourceTree = "<group>";
@@ -528,8 +534,10 @@
 				25EC9C861DFBE01A00C30604 /* PAAboutPageViewController.swift in Sources */,
 				2583CA521DD3B5D2004711DC /* PAPerson.swift in Sources */,
 				2568E9E31DD281A300FE911E /* PADataManager.swift in Sources */,
+				2539ED5C1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodeld in Sources */,
 				2583CA581DD3B748004711DC /* PARepository.swift in Sources */,
 				2568E9E11DD27DC900FE911E /* ContentAddSelectorViewController.swift in Sources */,
+				2539ED5E1DFBFA23008B7D38 /* PAPhotoUploadForm.swift in Sources */,
 				25D87CF71DE97A5C000D2160 /* PAPhotoInfoLocationTableViewCell.swift in Sources */,
 				25D87CFE1DE98C21000D2160 /* PATimeLabel.swift in Sources */,
 				25D03BCD1DC19FE900045988 /* PADateManager.swift in Sources */,
@@ -791,6 +799,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2539ED5A1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2539ED5B1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodel */,
+			);
+			currentVersion = 2539ED5B1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodel */;
+			path = PAPhotoArchivingModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 25D03B9A1DC19DAE00045988 /* Project object */;
 }

@@ -7,12 +7,51 @@
 //
 
 import Foundation
+import CoreData
 
+enum TFLogDomain : String {
+    case General = "General"
+    case Chromecast = "Chromecast"
+    case ViewLayout = "View Layout"
+    case Firebase =  "Firebase"
+}
+
+enum TFLogType : String {
+    case Error = "Error"
+    case Notification = "Notification"
+    case Debugging = "Debugging"
+    case Unknown = "Unknown"
+}
+
+class TFLogObject {
+    var logType = TFLogType.Unknown
+    var logDate = Date()
+    var logDateString : String {
+        get {
+            return PADateManager.sharedInstance.getDateString(date: self.logDate, formatType: .FirebaseFull)
+        }
+    }
+    
+    var logMessage = ""
+    var logPriority = 0
+    var logCode = 0
+    var uid : String = NSUUID().uuidString
+    var logDomain = TFLogDomain.General
+    
+}
 class TFLogger {
+    
+    static let sharedInstance = TFLogger()
     
     static let shouldLog = true
     static let useDelimiter = true
     static let delimiter = "--------------"
+    
+    
+    init() {
+        self.setupCoreData()
+    }
+    
     
     static func log( logString : String, arguments : String...) {
         
@@ -61,6 +100,77 @@ class TFLogger {
     }
     
     
+    
+    
+    
+    
+    
+    //  MARK: Core Data
+    
+    
+    
+    var managedObjectContext : NSManagedObjectContext?
+    private var isCoreDataSetup = false
+    
+    private func setupCoreData() {
+        
+        guard let modelURL = Bundle.main.url(forResource: "PAPhotoArchivingModel", withExtension: "momd") else {
+            
+            let errorMessage = "There was an error opening the model URL"
+            fatalError(errorMessage)
+            
+        }
+        
+        
+        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+            let errorMessage = "There was an error creating the managed object model"
+            
+            fatalError(errorMessage)
+        }
+        
+        
+         let psc = NSPersistentStoreCoordinator(managedObjectModel: mom)
+        managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        
+        DispatchQueue.main.async {
+            let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            
+            if let docURL = urls.last {
+                
+                let storeFileName = "PAPhotoArchivingModel.sqlite"
+                
+                let storeURL = docURL.appendingPathComponent(storeFileName)
+                
+                do {
+                    try psc.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: "configName", at: storeURL, options: nil)
+                    self.isCoreDataSetup = true
+                } catch let err {
+                    let errorMessage = "There was an error creating the persistent store...\(err.localizedDescription)"
+                    
+                    fatalError(errorMessage)
+                }
+            }
+            else {
+                let errorMessage = "There was no last document URL"
+                fatalError(errorMessage)
+            }
+        }
+        
+        
+        
+    }
+    
+    
+    func log( domain : TFLogDomain, logString : String, arguments : String...) {
+        
+        let logMessage = String.PAStringByReplacement(str: logString, arguments: arguments)
+        
+        let newLog = TFLogObject()
+        
+        
+        newLog.logMessage = logMessage
+        
+    }
 }
 
 extension String {

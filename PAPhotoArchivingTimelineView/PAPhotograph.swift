@@ -29,7 +29,7 @@ class PAPhotograph {
     private static let DEFAULT_LOC_COUNTRY              = "Any Country"
     private static let DEFAULT_LOC_CONF : Float         = 0.0
     
-    var uid = ""
+    var uid = UUID().uuidString
     var title = ""
     var longDescription = ""
     var uploadedBy : PAUser?
@@ -205,7 +205,42 @@ extension PAPhotograph {
         return newPhoto
     }
     
-    
+    static func Mock2() -> PAPhotograph {
+        let newPhoto = PAPhotograph()
+        
+        newPhoto.uid = UUID().uuidString
+        
+        newPhoto.dateTaken = PADateManager.sharedInstance.getDateFromYearInt(year: 1922)
+        newPhoto.dateTakenConf = 0.8
+        newPhoto.dateUploaded = Date.dateBySubtractingDays(days: 600)
+        newPhoto.longDescription = "What a day to be out!"
+        newPhoto.title = "A day at the park"
+        
+        newPhoto.thumbnailImage = #imageLiteral(resourceName: "thumb_image_test")
+        newPhoto.mainImage = #imageLiteral(resourceName: "main_image_test")
+        
+        let location = PALocation()
+        location.city = "St. Louis"
+        location.state = "Missouri"
+        location.country = "U.S.A."
+        location.zip = "63144"
+        location.coordinates = CLLocationCoordinate2D(latitude: 38.6011179, longitude: -90.3681826)
+        
+        newPhoto.locationTaken = location
+        
+        let uploader = PAUser()
+        
+        uploader.dateJoined = Date.dateBySubtractingYears(years: 3)
+        uploader.dateLastLoggedIn = Date.dateBySubtractingDays(days: 10)
+        uploader.birthDate = Date.dateBySubtractingYears(years: 21)
+        uploader.firstName = "Anthony"
+        uploader.lastName = "F"
+        uploader.profileImageURL = "http://i.imgur.com/0o3i6of.jpg"
+        
+        newPhoto.uploadedBy = uploader
+        
+        return newPhoto
+    }
 }
 
 //  Logger extension
@@ -237,5 +272,44 @@ extension PAPhotograph {
             
             return objectLogger.getLogString()
         }
+    }
+}
+
+extension PAPhotograph {
+    
+    func PAGetJSONCompatibleArray() -> [String : Any] {
+    
+        var jsonArray = [String : Any]()
+        
+        
+        //  UID
+        jsonArray[Keys.Photograph.uid] = self.uid
+        
+        //  Title
+        jsonArray[Keys.Photograph.title] = self.title
+        
+        //  Description
+        jsonArray[Keys.Photograph.description] = self.longDescription 
+        
+        //  Date Taken
+        if let d = self.dateTaken {
+            let dStr = PADateManager.sharedInstance.getDateString(date: d, formatType: .FirebaseFull)
+            
+            jsonArray[Keys.Photograph.dateTaken] = dStr
+        }
+        else {
+            jsonArray[Keys.Photograph.dateTaken] = ""
+        }
+        
+        //  Date Taken Confidence
+        jsonArray[Keys.Photograph.dateTakenConf] = self.dateTakenConf
+        
+        //  Thumbnail URL
+        jsonArray[Keys.Photograph.thumbURL] = self.thumbnailURL
+        
+        //  Main URL
+        jsonArray[Keys.Photograph.mainURL] = self.mainImageURL
+    
+        return jsonArray
     }
 }

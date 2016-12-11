@@ -13,6 +13,9 @@ target 'PAPhotoArchivingTimelineView' do
 	
 	pod 'SwiftyJSON'
 	
+	pod 'Eureka', '~> 2.0.0-beta.1'
+	
+	
 	# pod 'SwiftyTools', :git => 'https://github.com/forsythetony/SwiftyTools'
 end
 

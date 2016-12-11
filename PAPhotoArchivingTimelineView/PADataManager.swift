@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import UIKit
 
 
 protocol PADataManagerDelegate {
@@ -49,9 +50,12 @@ class PADataManager {
                 time.invalidate()
                 self.configTimer = nil
             }
+            
+            return
         }
         
         //  If Firebase is already configured then stop the timer and do personal configuration
+        
         if (FIRApp.defaultApp() != nil) {
             database_ref = FIRDatabase.database().reference()
             storage_ref = FIRStorage.storage().reference(forURL: Constants.DataManager.firebaseStorageURL)
@@ -100,6 +104,7 @@ class PADataManager {
         }
     }
     
+    
     func pullRepositories() {
         
         guard let dbRef = self.database_ref else {
@@ -122,3 +127,184 @@ class PADataManager {
 }
 
 
+extension PADataManager {
+    
+    func addPhotographToRepository( newPhoto : PAPhotograph, repository : PARepository ) {
+        
+        if !isConfigured { return }
+        
+        guard let mainImage = newPhoto.mainImage, let thumbImage = newPhoto.thumbnailImage else
+        {
+            TFLogger.log(logString: "Either the main image or thumb image was null, aborting")
+            return
+        }
+        
+        guard   let mainImageData = UIImageJPEGRepresentation(mainImage, 1.0),
+                let thumbImageData = UIImageJPEGRepresentation(thumbImage, 1.0) else {
+                
+                TFLogger.log(logString: "Either the main image or the thumb image could not be converted into an NSData object")
+                    
+                return
+        }
+        
+        guard let s_ref = self.storage_ref, let db_ref = self.database_ref else { return }
+        
+        let mainImageName = newPhoto.uid + ".jpg"
+        let thumbImageName = newPhoto.uid + "_tn.jpg"
+        
+        let mainImagesPath = "images/main/"
+        let thumbImagesPath = "images/thumbnail/"
+        
+        
+        
+        
+        //let queue = DispatchQueue(label: "myDispatchQueue")
+        let dbSetGroup = DispatchGroup()
+        let uploadGroup = DispatchGroup()
+        let uploadingQueue = DispatchQueue(label: "uploadQueue")
+        
+        var someError : Error?
+        var thumbnailURL : String?
+        var mainURL : String?
+        
+        
+        let mData = FIRStorageMetadata()
+        mData.contentType = "image/jpeg"
+        
+        
+        let dateLocation = repository.whereDoesPhotoFall(photo: newPhoto)
+        var datePathUpdate = "repositories/" + repository.uid
+        
+        var shouldUpdateRepoDate = false
+        
+        switch dateLocation {
+        case .Before:
+            datePathUpdate += "/" + Keys.Repository.startDate
+            shouldUpdateRepoDate = true
+            
+        case .After:
+            datePathUpdate += "/" + Keys.Repository.endDate
+            shouldUpdateRepoDate = true
+            
+        default:
+            break
+        }
+        
+        var updateDateString = ""
+        
+        if shouldUpdateRepoDate {
+            updateDateString = PADateManager.sharedInstance.getDateString(date: newPhoto.dateTaken!, formatType: .FirebaseFull)
+        }
+        
+        uploadGroup.enter()
+        uploadingQueue.async(group: uploadGroup) {
+            let mainImageRef = s_ref.child(mainImagesPath + mainImageName)
+            mainImageRef.put(mainImageData, metadata: mData, completion: { (metadata, error) in
+                
+                if error != nil {
+                    //  Abort
+                    someError = error!
+                    
+                }
+                
+                if let dURL = metadata?.downloadURL() {
+                    mainURL = dURL.absoluteString
+                }
+                
+                uploadGroup.leave()
+            })
+        }
+        
+        uploadGroup.enter()
+        uploadingQueue.async(group: uploadGroup) {
+            let thumbImageRef = s_ref.child(thumbImagesPath + thumbImageName)
+            thumbImageRef.put(thumbImageData, metadata: mData, completion: { (metadata, error) in
+                
+                if error != nil {
+                    someError = error
+                }
+                
+                if let dURL = metadata?.downloadURL() {
+                    thumbnailURL = dURL.absoluteString
+                }
+                
+                uploadGroup.leave()
+            })
+        }
+        
+    
+        
+        uploadGroup.notify(queue: DispatchQueue.main) {
+            
+            if someError != nil {
+                return
+            }
+            if mainURL != nil, thumbnailURL != nil {
+                newPhoto.mainImageURL = mainURL!
+                newPhoto.thumbnailURL = thumbnailURL!
+            }
+            else {
+                TFLogger.log(logString: "One of the urls turned out to be nil")
+            }
+            
+            
+            if shouldUpdateRepoDate {
+                
+                dbSetGroup.enter()
+                uploadingQueue.async(group: dbSetGroup) {
+                    
+                    let dateUpdateHandle = db_ref.child(datePathUpdate)
+                    dateUpdateHandle.setValue(updateDateString, withCompletionBlock: { (dateUpdateError, dateUpdateRef) in
+                        
+                        if dateUpdateError != nil {
+                            //  Uh Oh
+                        }
+                        
+                        dbSetGroup.leave()
+                    })
+                }
+            }
+            
+            dbSetGroup.enter()
+            uploadingQueue.async(group: dbSetGroup) {
+                let photographData = newPhoto.PAGetJSONCompatibleArray()
+                let photosPath = "photographs/" + newPhoto.uid
+                
+                let photoRef = db_ref.child(photosPath)
+                
+                photoRef.setValue(photographData, withCompletionBlock: { (err, ref) in
+                    if let err = err {
+                        someError = err
+                    }
+                    
+                    dbSetGroup.leave()
+                })
+            }
+            
+            
+            dbSetGroup.enter()
+            uploadingQueue.async(group: dbSetGroup) {
+                let pathToRepoPhotos = "repositories/" + repository.uid + "/photos"
+                
+                let photosDBRef = db_ref.child(pathToRepoPhotos).child(newPhoto.uid)
+                
+                photosDBRef.setValue("true", withCompletionBlock: { (err, ref) in
+                    
+                    if let err = err {
+                        someError = err
+                    }
+                    
+                    dbSetGroup.leave()
+                })
+            }
+            
+            
+            
+            dbSetGroup.notify(queue: DispatchQueue.main) {
+                print("I did it!")
+            }
+            
+        }
+        
+    }
+}

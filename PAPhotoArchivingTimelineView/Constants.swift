@@ -59,6 +59,14 @@ struct Constants {
     
     static let Symbols = ["$", "#"]
     
+    struct Photographs {
+        static let thumbnailSize : CGSize = {
+            let dim : CGFloat = 70.0
+            var size = CGSize.zero
+            size.PASetBoth(dim: dim)
+            return size
+        }()
+    }
     struct Fonts {
         struct MainFontFamilies {
             static let regular  = "Avenir-Book"
@@ -178,6 +186,9 @@ struct Constants {
         static let firebaseMainImagesPath = "images/main"
         static let firebaseRecordingsPath = "recordings"
     }
+    
+    
+    
 }
 
 typealias Font = UIFont

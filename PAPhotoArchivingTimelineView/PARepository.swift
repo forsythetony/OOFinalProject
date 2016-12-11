@@ -123,6 +123,22 @@ extension PARepository {
         return p
     }
     
+    static func Mock2() -> PARepository {
+        
+        let p = PARepository()
+        
+        p.uid = "afssdkufhkusdhfskjfhksjhdf"
+        p.title = "Test Repo"
+        p.shortDescription = "Hello"
+        p.longDescription = "No way"
+        p.thumbnailURL = "http://i.imgur.com/0o3i6of.jpg"
+        p.startDate = PADateManager.sharedInstance.getDateFromYearInt(year: 1903)
+        p.endDate = PADateManager.sharedInstance.getDateFromYearInt(year: 1943)
+        
+        
+        return p
+    }
+    
     func populatePhotographs() {
         
         let newPhotograph = PAPhotograph.Mock1()

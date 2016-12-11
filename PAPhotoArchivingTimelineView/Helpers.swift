@@ -427,6 +427,35 @@ extension String {
         }
         
     }
+    
+    
+    static func PAStringByReplacement( str : String, arguments : [String]) -> String {
+        guard arguments.count > 0 else {
+            return ""
+        }
+        
+        var newString = str
+        
+        
+        let argCount = arguments.count
+        var counter = 0
+        
+        var currRange = newString.getNextRangeOccurrenceOfString(str: "%@")
+        
+        while( currRange != nil && counter < argCount) {
+            
+            
+            let currArg = arguments[counter]
+            
+            newString = newString.replacingCharacters(in: currRange!, with: currArg)
+            
+            currRange = newString.getNextRangeOccurrenceOfString(str: "%@")
+            
+            counter += 1
+        }
+        
+        return newString
+    }
 }
 
 extension UINavigationItem {
@@ -513,4 +542,93 @@ class TFTextViewTextGenerator {
     
     
     
+}
+extension CGFloat {
+    
+    var FloatValue : Float {
+        get {
+            return Float(self)
+        }
+    }
+    
+    var Halve : CGFloat {
+        get {
+            return self / 2.0
+        }
+    }
+}
+extension Date {
+    
+    func isInRange( rangeStart : Date, rangeEnd : Date ) -> Bool {
+        
+        return  self.compare(rangeStart) == ComparisonResult.orderedDescending &&
+                self.compare(rangeEnd) == ComparisonResult.orderedAscending
+    }
+    
+    func isAfterDate( date : Date ) -> Bool {
+        
+        return self.compare(date) == ComparisonResult.orderedDescending
+    }
+    
+    func isBeforeDate( date : Date ) -> Bool {
+        
+        return self.compare(date) == ComparisonResult.orderedAscending
+    }
+}
+
+infix operator ^^^
+infix operator -^-
+
+extension CGSize {
+    mutating func PASetBoth( dim : CGFloat ) {
+        self.height = dim
+        self.width = dim
+    }
+}
+extension CGFloat {
+    static func ^^^ (left: CGFloat, right : CGFloat) -> CGFloat {
+        if left > right { return left }
+        if right > left { return right }
+        return left
+    }
+    
+    static func -^- (left: CGFloat, right : CGFloat) -> CGFloat {
+        if left < right { return left }
+        if right < left { return right }
+        
+        return left
+    }
+}
+
+extension UIImage {
+    
+    static func PAImageWithImage( img : UIImage, scaledTo size : CGSize) -> UIImage? {
+        
+        let scale = (size.width/img.size.width) ^^^ (size.height/img.size.height)
+        let width = img.size.width * scale
+        let height = img.size.height * scale
+        let imageRect = CGRect(x: (size.width - width).Halve, y: (size.height - height).Halve, width: width, height: height)
+        
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        img.draw(in: imageRect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+        
+    }
+    
+    
+    func PACalculateThumbnailSizeUsingFactor( factor : CGFloat ) -> CGSize {
+        var size = CGSize.zero
+        
+        //  Scale using the minimum of the two dimensions
+        let scalee = self.size.width -^- self.size.height
+        
+        let scaledSize = scalee * factor
+        
+        size.PASetBoth(dim: scaledSize)
+        
+        return size
+    }
 }

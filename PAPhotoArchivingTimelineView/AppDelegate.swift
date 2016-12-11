@@ -54,8 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupFirebase() {
         FIRApp.configure()
         
+        
         let username = "forsythetony@gmail.com"
-        let password = "applepie22"
+        let password = "Bf^f16rJcQrgeHZLJyw3F%iAxvrHjhYEtMo@TJoO"
         
         FIRAuth.auth()?.signIn(withEmail: username, password: password) { (user, error) in
             if let error = error {
@@ -64,6 +65,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
+ 
+        
+        //do { try FIRAuth.auth()?.signOut() } catch let error { print(error.localizedDescription) }
         
         MockDataGenerator.sharedInstance.configureDatabase()
     }
