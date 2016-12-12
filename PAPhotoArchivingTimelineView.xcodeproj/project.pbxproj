@@ -15,6 +15,11 @@
 		2539ED5E1DFBFA23008B7D38 /* PAPhotoUploadForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2539ED5D1DFBFA23008B7D38 /* PAPhotoUploadForm.swift */; };
 		255C4F041DE9120400EBD24C /* PAMainImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C4F031DE9120400EBD24C /* PAMainImageViewController.swift */; };
 		255C4F061DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255C4F051DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift */; };
+		255D7EB81DFF117D002F4C8F /* TFImageHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255D7EB71DFF117D002F4C8F /* TFImageHelpers.swift */; };
+		255D7EBA1DFF11A4002F4C8F /* PABasicHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255D7EB91DFF11A4002F4C8F /* PABasicHelpers.swift */; };
+		255D7EBC1DFF1F53002F4C8F /* TEST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255D7EBB1DFF1F53002F4C8F /* TEST.swift */; };
+		255D7EBF1DFF2B54002F4C8F /* LocationData.json in Resources */ = {isa = PBXBuildFile; fileRef = 255D7EBE1DFF2B54002F4C8F /* LocationData.json */; };
+		255D7EC11DFF2B8D002F4C8F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255D7EC01DFF2B8D002F4C8F /* LocationManager.swift */; };
 		2568E9DD1DD27CB200FE911E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2568E9DC1DD27CB200FE911E /* GoogleService-Info.plist */; };
 		2568E9DF1DD27D5100FE911E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9DE1DD27D5100FE911E /* Constants.swift */; };
 		2568E9E11DD27DC900FE911E /* ContentAddSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */; };
@@ -82,6 +87,11 @@
 		2539ED5D1DFBFA23008B7D38 /* PAPhotoUploadForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotoUploadForm.swift; sourceTree = "<group>"; };
 		255C4F031DE9120400EBD24C /* PAMainImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAMainImageViewController.swift; sourceTree = "<group>"; };
 		255C4F051DE9738B00EBD24C /* PAPhotoInfoDateTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PAPhotoInfoDateTableViewCell.swift; sourceTree = "<group>"; };
+		255D7EB71DFF117D002F4C8F /* TFImageHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TFImageHelpers.swift; sourceTree = "<group>"; };
+		255D7EB91DFF11A4002F4C8F /* PABasicHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PABasicHelpers.swift; sourceTree = "<group>"; };
+		255D7EBB1DFF1F53002F4C8F /* TEST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TEST.swift; sourceTree = SOURCE_ROOT; };
+		255D7EBE1DFF2B54002F4C8F /* LocationData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = LocationData.json; sourceTree = "<group>"; };
+		255D7EC01DFF2B8D002F4C8F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2568E9DC1DD27CB200FE911E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2568E9DE1DD27D5100FE911E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2568E9E01DD27DC900FE911E /* ContentAddSelectorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentAddSelectorViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +229,9 @@
 				25EC9C851DFBE01A00C30604 /* PAAboutPageViewController.swift */,
 				2539ED5A1DFBEF24008B7D38 /* PAPhotoArchivingModel.xcdatamodeld */,
 				2539ED5D1DFBFA23008B7D38 /* PAPhotoUploadForm.swift */,
+				255D7EB71DFF117D002F4C8F /* TFImageHelpers.swift */,
+				255D7EB91DFF11A4002F4C8F /* PABasicHelpers.swift */,
+				255D7EBE1DFF2B54002F4C8F /* LocationData.json */,
 			);
 			path = PAPhotoArchivingTimelineView;
 			sourceTree = "<group>";
@@ -226,6 +239,7 @@
 		25D03BB91DC19DAE00045988 /* PAPhotoArchivingTimelineViewUITests */ = {
 			isa = PBXGroup;
 			children = (
+				255D7EBB1DFF1F53002F4C8F /* TEST.swift */,
 				25D03BBA1DC19DAE00045988 /* PAPhotoArchivingTimelineViewUITests.swift */,
 				25D03BBC1DC19DAE00045988 /* Info.plist */,
 			);
@@ -269,6 +283,7 @@
 				25D87CFF1DE99393000D2160 /* PAAudioManager.swift */,
 				25D87D011DE993BE000D2160 /* PAFileManager.swift */,
 				25D87D161DEA1511000D2160 /* PAChromecaster.swift */,
+				255D7EC01DFF2B8D002F4C8F /* LocationManager.swift */,
 			);
 			name = Singletons;
 			sourceTree = "<group>";
@@ -412,6 +427,7 @@
 				250B3A2E1DE8FB70002CE391 /* PAApplicationImages.xcassets in Resources */,
 				2568E9DD1DD27CB200FE911E /* GoogleService-Info.plist in Resources */,
 				25D03BAD1DC19DAE00045988 /* Assets.xcassets in Resources */,
+				255D7EBF1DFF2B54002F4C8F /* LocationData.json in Resources */,
 				25D03BAB1DC19DAE00045988 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,9 +542,12 @@
 				25D03BA81DC19DAE00045988 /* PARepositoryViewController.swift in Sources */,
 				25D03BC71DC19EC500045988 /* PARepositoryInfo.swift in Sources */,
 				25D03BCA1DC19FAB00045988 /* PATimelineView.swift in Sources */,
+				255D7EC11DFF2B8D002F4C8F /* LocationManager.swift in Sources */,
 				255C4F041DE9120400EBD24C /* PAMainImageViewController.swift in Sources */,
 				25D03BA61DC19DAE00045988 /* AppDelegate.swift in Sources */,
+				255D7EB81DFF117D002F4C8F /* TFImageHelpers.swift in Sources */,
 				2568E9E71DD28B7B00FE911E /* PATimelineManager.swift in Sources */,
+				255D7EBA1DFF11A4002F4C8F /* PABasicHelpers.swift in Sources */,
 				25D87D061DE9C085000D2160 /* PATextEditView.swift in Sources */,
 				2583CA5C1DD3C727004711DC /* PAPhotoInfoRegularTableViewCell.swift in Sources */,
 				25EC9C861DFBE01A00C30604 /* PAAboutPageViewController.swift in Sources */,
@@ -571,6 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25D03BBB1DC19DAE00045988 /* PAPhotoArchivingTimelineViewUITests.swift in Sources */,
+				255D7EBC1DFF1F53002F4C8F /* TEST.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

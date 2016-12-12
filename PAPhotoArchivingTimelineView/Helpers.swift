@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import Eureka
+import NoticeBar
+import Iconic
 
 //  Creating placeholder images
 
@@ -605,12 +607,7 @@ extension Date {
 infix operator ^^^
 infix operator -^-
 
-extension CGSize {
-    mutating func PASetBoth( dim : CGFloat ) {
-        self.height = dim
-        self.width = dim
-    }
-}
+
 extension CGFloat {
     static func ^^^ (left: CGFloat, right : CGFloat) -> CGFloat {
         if left > right { return left }
@@ -673,6 +670,24 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
         
     }
+    
+    
+    func PADisplayErrorNoticeBar( message : String, duration : TimeInterval = 3.0, color : Color = Color.PAErrorCritical) {
+        
+        let config = NoticeBarConfig(title: message, image: nil, textColor: Color.PAWhiteOne, backgroundColor: color, barStyle: .onNavigationBar, animationType: .bottom)
+        let bar = NoticeBar(config: config)
+        
+        bar.show(duration: duration, completed: nil)
+    }
+    
+    func PADisplaySuccessNoticeBar( message : String, duration : TimeInterval = 3.0, color : Color = Color.PASuccess) {
+        let config = NoticeBarConfig(title: message, image: nil, textColor: Color.PAWhiteOne, backgroundColor: color, barStyle: .onNavigationBar, animationType: .bottom)
+        let bar = NoticeBar(config: config)
+        
+        bar.show(duration: duration, completed: nil)
+    }
+    
+    
 }
 
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Iconic
 
 class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
 
@@ -114,7 +115,7 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
             let dest = segue.destination as! PAPhotoUploadForm
             
             dest.repo = repo
-            
+            dest.delegate = self
             
         default:
             print("Default")
@@ -133,8 +134,10 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
     
     private func setupInfoButton() {
         
-        let btnImg = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
-        
+        //let btnImg = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
+        let icon = FontAwesomeIcon.InfoSign
+        let btnSize = CGSize(width: 40.0, height: 40.0)
+        let btnImg = icon.image(ofSize: btnSize, color: Color.white)
         
         
         let btn = UIBarButtonItem(image: btnImg, style: .plain, target: self, action: #selector(self.didTapAboutInfo(sender:)))
@@ -152,7 +155,11 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
     
     private func setupAddPhotographButton() {
         
-        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.didTapAddPhotograph(sender:)))
+        let icon = FontAwesomeIcon.PlusSign
+        let iconSize = CGSize(width: 30.0, height: 30.0)
+        let iconImage = icon.image(ofSize: iconSize, color: .black).withRenderingMode(.alwaysOriginal)
+        
+        let rightBarButtonItem = UIBarButtonItem(image: iconImage, style: .plain, target: self, action: #selector(self.didTapAddPhotograph(sender:)))
         
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
     }
@@ -170,5 +177,24 @@ extension PARepositoryViewController: PATimelineViewDelegate {
         TFLogger.log(logString: "Tapping image with information", arguments: info.getPhotoInfoData().description)
         self.chromecaster.sendPhoto(photo: info)
         self.performSegue(withIdentifier: Constants.SegueIDs.ToPhotoInformation, sender: info)
+    }
+}
+
+extension PARepositoryViewController : PAPhotoUploadFormDelegate {
+    
+    func PAPhotoUploadFormDidCancel() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func PAPhotoUploadFormDidFinishUploadingPhotoWithError(error: PAPhotoUploadError?) {
+        if let err = error {
+            self.dismiss(animated: true, completion: {
+                self.PADisplayErrorAlert(message: "There was an error uploading the image \(err.localizedDescription)")
+            })
+            
+            return
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
 }

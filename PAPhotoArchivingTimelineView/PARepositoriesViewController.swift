@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Iconic
 
 class PARepositoriesViewController: UIViewController {
 
@@ -102,7 +103,9 @@ class PARepositoriesViewController: UIViewController {
     
     private func setupInfoButton() {
         
-        let btnImg = UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal)
+        let icon = FontAwesomeIcon.InfoSign
+        let btnSize = CGSize(width: 30.0, height: 30.0)
+        let btnImg = icon.image(ofSize: btnSize, color: Color.black).withRenderingMode(.alwaysOriginal)
         
         
         
@@ -263,16 +266,13 @@ extension PARepositoriesViewController : UICollectionViewDataSource, UICollectio
             
             let imgPath = cellInfo.thumbnailURL
             
-            cell.ImageView.downloadedFrom(link: imgPath)
+            cell.setImageWithLink(link: imgPath)
             
             let repoTitle = cellInfo.title
             
             cell.TitleLabel.text = repoTitle
             
         }
-        
-        
-        cell.backgroundColor = Color.black
         
         return cell
     }

@@ -66,6 +66,8 @@ class PAPhotoUploadForm : FormViewController {
             var header = HeaderFooterView<PACustomHeaderView>(.class)
             header.height = { PACustomHeaderView.height }
             
+            
+            
             section.header = header
             
             }
@@ -109,6 +111,20 @@ class PAPhotoUploadForm : FormViewController {
                 sRow.tag = Keys.Photograph.dateTakenConf
                 
             }
+        +++ Section("Location")
+            <<< PickerInlineRow<PAState>() { (row : PickerInlineRow<PAState>) -> Void in
+                
+                row.title = "State"
+                row.displayValueFor = { (rowValue : PAState?) in
+                    if let s = rowValue {
+                        return s.abbreviation!
+                    }
+                    else {
+                        return ""
+                    }
+                }
+                row.tag = Keys.Photograph.locationState
+            }
         +++ Section("Completion")
             <<< ButtonRow() { btnRow in
                 btnRow.title = "Submit"
@@ -120,9 +136,26 @@ class PAPhotoUploadForm : FormViewController {
             }
         
         
+        self.setupLocationData()
         self.setupPicker()
     }
     
+    private func setupLocationData() {
+        
+        let locMan = PALocationManager.sharedInstance
+        locMan.getAllStates { (err, states) in
+            if err != nil {
+                TFLogger.log(logString: "There was an error for real")
+                return
+            }
+            
+            let row = self.form.rowBy(tag: Keys.Photograph.locationState) as? PickerInlineRow<PAState>
+            
+            for state in states! {
+                row?.options.append(state)
+            }
+        }
+    }
     private func getRandomDate() -> Date {
         if let repository = self.repo {
             if let startDate = repository.startDate, let endDate = repository.endDate {
@@ -142,7 +175,8 @@ class PAPhotoUploadForm : FormViewController {
         let p = self.photoInformation
         
         if p.mainImage == nil {
-            self.PADisplayErrorAlert(message: "You didn't pick an image...")
+            self.PADisplayErrorNoticeBar(message: "You need to choose an image.", duration: 3.0, color: .PAErrorWarning)
+            
             return
         }
         
@@ -324,15 +358,20 @@ class PACustomHeaderView : UIView {
         
         imageView.frame = frm
         
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         self.clipsToBounds = true
-        self.backgroundColor = Color.orange
+        self.backgroundColor = Color.PAGreyOne
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
         
         self.addSubview(imageView)
         
         imageView.alignToParent(with: 0.0)
+        
+        
+        let placeholderImage = UIImage.PABoxPlaceholderImageWithDimension(dim: PACustomHeaderView.height * 0.8, color: .PAWhiteTwo)
+        
+        imageView.image = placeholderImage
     }
     
     required init?(coder aDecoder: NSCoder) {

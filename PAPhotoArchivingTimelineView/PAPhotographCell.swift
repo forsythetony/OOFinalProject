@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 protocol PAPhotographCellDelegate {
     func PAPhotographCellWasTapped( sender : PAPhotographCell )
@@ -70,10 +71,21 @@ class PAPhotographCell: UIView {
     private func updateInformation() {
         
         if let info = self.photographInfo {
-            let link = info.mainImageURL
+            let url = URL(string: info.mainImageURL)!
+            let placeholder = UIImage.PABoxPlaceholderImageWithDimension(dim: self.frame.height * 0.7, color: .PAWhiteTwo)
+            let filter = AspectScaledToFillSizeWithRoundedCornersFilter(size: self.frame.size, radius: 5.0)
             
-            self.photoImageView.downloadedFrom(url: URL(string: link)!)
-            
+            self.photoImageView.af_setImage(
+                withURL: url,
+                placeholderImage: placeholder,
+                filter: filter,
+                progress: { (progress) in
+                    print("The progress is \(progress)")
+                },
+                progressQueue: DispatchQueue.main,
+                imageTransition: .crossDissolve(0.5),
+                runImageTransitionIfCached: true,
+                completion: nil)
         }
         
     }

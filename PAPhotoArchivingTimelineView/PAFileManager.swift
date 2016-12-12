@@ -53,6 +53,23 @@ class PAFileManager {
         }
     }
     
+    func getJSONDataWithFilename( fileName : String ) -> Data? {
+        
+        guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
+            TFLogger.log(logString: "Couldn't get the url with string", arguments: fileName)
+            return nil
+        }
+        
+        do {
+            let jsonData = try Data(contentsOf: url)
+            
+            return jsonData
+            
+        } catch let err {
+            TFLogger.log(str: "Error reading the json data", err: err)
+            return nil
+        }
+    }
     private func validateFilePaths() {
         
         if ready == false {

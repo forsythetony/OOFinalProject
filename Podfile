@@ -15,6 +15,10 @@ target 'PAPhotoArchivingTimelineView' do
 	
 	pod 'Eureka', '~> 2.0.0-beta.1'
 	pod "SwiftSpinner"
+	pod 'Iconic', :git => 'https://github.com/forsythetony/Iconic.git'
+	pod 'NoticeBar'
+	pod 'Colours', :git => 'https://github.com/forsythetony/Colours.git'
+	pod 'AlamofireImage', '~> 3.1'
 	
 	# pod 'SwiftyTools', :git => 'https://github.com/forsythetony/SwiftyTools'
 end

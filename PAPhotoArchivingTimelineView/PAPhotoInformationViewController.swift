@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class PAPhotoInformationViewController: UIViewController {
 
@@ -27,10 +28,12 @@ class PAPhotoInformationViewController: UIViewController {
     }
     var photoInfo : PAPhotograph? {
         didSet {
-            photoImageView.downloadedFrom(link: (photoInfo?.mainImageURL)!)
+            
             if let photoInfo = photoInfo {
                 photoInfo.delegate = self
                 photoInfo.fetchStories()
+                
+                
             }
         }
     }
@@ -180,6 +183,20 @@ extension PAPhotoInformationViewController : UITableViewDelegate, UITableViewDat
             tap.numberOfTapsRequired = 2
             
             ve.addGestureRecognizer(tap)
+            
+            
+            
+            if let urlStr = self.photoInfo?.mainImageURL {
+                
+                if let url = URL(string: urlStr) {
+                    let placeholder = UIImage.PABoxPlaceholderImageWithDimension(dim: Constants.PhotoInformationVC.ImageHeaderHeight * 0.8, color: .white)
+                    let filter = AspectScaledToFitSizeFilter(size: self.photoImageView.frame.size)
+                    
+                    self.photoImageView.af_setImage(withURL: url, placeholderImage: placeholder, filter: filter, progress: nil, progressQueue: DispatchQueue.main, imageTransition: .crossDissolve(0.5), runImageTransitionIfCached: true, completion: nil)
+                }
+            }
+            
+            
             
             return ve
         }

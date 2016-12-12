@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class PARepositoryCollectionViewCell: UICollectionViewCell {
     
@@ -25,7 +26,31 @@ class PARepositoryCollectionViewCell: UICollectionViewCell {
         
         self.setupViews()
     }
-    
+    func setImageWithLink( link : String) {
+        
+        guard let url = URL(string: link) else {
+            return
+        }
+        
+        
+        let placeholderImage = UIImage.PABoxPlaceholderImageWithDimension(dim: self.frame.height * 0.8, color: .PAWhiteTwo)
+        let progressFunction : ((Progress) -> ()) = { (progress) in
+            let totalWork = progress.totalUnitCount
+            let currWork = progress.completedUnitCount
+            
+            let floatProgress = (Float(currWork) / Float(totalWork)) * Float(100.0)
+            
+            let progressString = String.init(format: "%.2f", floatProgress)
+            
+            let str = "\n\nTotal Progress:\t" + progressString + "\n"
+            
+            print(str)
+        }
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(size: self.frame.size, radius: 5.0)
+        
+        self.ImageView.af_setImage(withURL: url, placeholderImage: placeholderImage, filter: filter, progress: progressFunction, progressQueue: DispatchQueue.main, imageTransition: .crossDissolve(0.5), runImageTransitionIfCached: true, completion: nil)
+        
+    }
     private func setupViews() {
         
         
@@ -52,7 +77,7 @@ class PARepositoryCollectionViewCell: UICollectionViewCell {
         self.contentView.addSubview(TitleLabel)
         
         frm.size.height = self.frame.height - titleLabelHeight
-        frm.origin.y = titleLabelHeight
+        frm.origin.y = 0.0
         
         ImageView.frame = frm
         ImageView.contentMode = .scaleAspectFill
@@ -62,6 +87,7 @@ class PARepositoryCollectionViewCell: UICollectionViewCell {
         
         self.contentView.sendSubview(toBack: ImageView)
         
+        ImageView.alignToParent(with: 0.0)
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

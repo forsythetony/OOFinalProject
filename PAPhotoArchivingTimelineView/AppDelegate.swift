@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Iconic
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //  Setup Firebase
         setupFirebase()
+        FontAwesomeIcon.register()
         
         return true
     }

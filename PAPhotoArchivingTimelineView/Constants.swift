@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Colours
 
 typealias Color = UIColor
 
@@ -269,8 +270,43 @@ extension Color {
             return Color(white: 1.0, alpha: 0.9)
         }
     }
+    
+    static var PAWhiteTwo : Color {
+        get {
+            return Color(white: 1.0, alpha: 0.8)
+        }
+    }
+    
+    static var PAGreyOne : Color {
+        get {
+            return Color.black25Percent()
+        }
+    }
+    static var PAErrorCritical : Color {
+        get {
+            return Color.ColorWithSimpleRGBA(r: 255.0, g: 1.0, b: 50.0, a: 1.0)
+        }
+    }
+    
+    static var PAErrorWarning : Color {
+        get {
+            return Color.ColorWithSimpleRGBA(r: 255.0, g: 204.0, b: 1.0, a: 1.0)
+        }
+    }
+    
+    static var PASuccess : Color {
+        get {
+            return Color.ColorWithSimpleRGBA(r: 83.0, g: 215.0, b: 106.0, a: 1.0)
+        }
+    }
 }
 
+extension Color {
+    
+    static func ColorWithSimpleRGBA( r : Double, g : Double, b : Double, a : Double) -> Color {
+        return Color(red: r.CGFloatRGBValue, green: g.CGFloatRGBValue, blue: a.CGFloatRGBValue, alpha: a.CGFloatValue)
+    }
+}
 extension Double {
     
     func RGBValue() -> Double {
