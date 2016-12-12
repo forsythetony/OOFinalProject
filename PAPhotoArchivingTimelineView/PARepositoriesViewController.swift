@@ -207,6 +207,10 @@ class PARepositoriesViewController: UIViewController {
 }
 
 extension PARepositoriesViewController : PADataManagerDelegate {
+    internal func PADataManagerDidFinishUploadingPhotographWithError(error: PAPhotoUploadError?) {
+        
+    }
+
     
     func PADataManagerDidGetNewRepository(_ newRepository: PARepository) {
         

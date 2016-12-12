@@ -31,7 +31,7 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         chromecaster.delegate = self
-        self.setupInfoButton()
+        self.setupAddPhotographButton()
         
     }
     
@@ -61,13 +61,12 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        //  Don't look for chromecasts at the moment
-        //chromecaster.beginSearching()
-        
-        
         self.navigationController?.navigationItem.PAClearBackButtonTitle()
     }
     
+    func didTapUploadStory( sender : UIBarButtonItem ) {
+        
+    }
     func setupTimelineView() {
         var viewRect = self.view.bounds
         viewRect.origin.x = 0.0
@@ -93,20 +92,32 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if let segueID = segue.identifier {
-            switch segueID {
-            case Constants.SegueIDs.ToPhotoInformation:
-                if let photoInfo = sender as? PAPhotograph {
-                    
-                    let dest = segue.destination as! PAPhotoInformationViewController
-                    
-                    dest.photoInfo = photoInfo
-                }
+        guard let segueID = segue.identifier else { return }
+        
+        
+        switch segueID {
+            
+        case Constants.SegueIDs.ToPhotoInformation:
+            if let photoInfo = sender as? PAPhotograph {
                 
+                let dest = segue.destination as! PAPhotoInformationViewController
                 
-            default:
-                print("Default")
+                dest.photoInfo = photoInfo
             }
+            
+        case Constants.SegueIDs.SegueFromTimelineToAddPhotograph:
+            guard let repo = self.currentRepository else {
+                self.PADisplayErrorAlert(message: "There was an error trying to access the repository")
+                return
+            }
+            
+            let dest = segue.destination as! PAPhotoUploadForm
+            
+            dest.repo = repo
+            
+            
+        default:
+            print("Default")
         }
     }
     
@@ -137,6 +148,17 @@ class PARepositoryViewController: UIViewController, PAChromeCasterDelegate {
         
         self.present(infoController, animated: true, completion: nil)
         
+    }
+    
+    private func setupAddPhotographButton() {
+        
+        let rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.didTapAddPhotograph(sender:)))
+        
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    func didTapAddPhotograph( sender : UIBarButtonItem ) {
+        self.performSegue(withIdentifier: Constants.SegueIDs.SegueFromTimelineToAddPhotograph, sender: nil)
     }
 
 }

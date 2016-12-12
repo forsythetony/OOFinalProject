@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Eureka
 
 //  Creating placeholder images
 
@@ -575,6 +576,31 @@ extension Date {
         return self.compare(date) == ComparisonResult.orderedAscending
     }
 }
+infix operator <->
+
+extension TimeInterval {
+    static func <-> (left: TimeInterval, right : TimeInterval) -> TimeInterval {
+        return ((left + right) / 2.0)
+    }
+}
+
+extension Date {
+    static func <-> (left : Date, right : Date ) -> Date {
+        let distPast = Date.distantPast
+        let leftDist = left.timeIntervalSince(distPast)
+        let rightDist = right.timeIntervalSince(distPast)
+        
+        if leftDist > rightDist { return left }
+        
+        let centerDist = leftDist <-> rightDist
+        
+        let newDate = Date(timeInterval: centerDist, since: distPast)
+        
+        return newDate
+    }
+}
+
+
 
 infix operator ^^^
 infix operator -^-
@@ -630,5 +656,32 @@ extension UIImage {
         size.PASetBoth(dim: scaledSize)
         
         return size
+    }
+}
+
+
+extension UIViewController {
+    
+    func PADisplayErrorAlert( message : String) {
+        
+        let alertController = UIAlertController(title: "ERROR", message: message, preferredStyle: .alert)
+        
+        let okButton = UIAlertAction(title: "Ok", style: .destructive, handler: nil)
+        
+        alertController.addAction(okButton)
+        
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+}
+
+
+extension Form {
+    
+    func PAsetValueForRowWithTag( value : Any, rowTag : String) {
+        
+        if let row = self.rowBy(tag: rowTag) {
+            row.baseValue = value
+        }
     }
 }

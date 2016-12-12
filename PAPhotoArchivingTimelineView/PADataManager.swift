@@ -10,10 +10,13 @@ import Foundation
 import Firebase
 import UIKit
 
-
+enum PAPhotoUploadError : Error {
+    case Something
+}
 protocol PADataManagerDelegate {
     func PADataManagerDidGetNewRepository(_ newRepository : PARepository)
     func PADataMangerDidConfigure()
+    func PADataManagerDidFinishUploadingPhotographWithError( error : PAPhotoUploadError? )
 }
 
 class PADataManager {
@@ -301,7 +304,7 @@ extension PADataManager {
             
             
             dbSetGroup.notify(queue: DispatchQueue.main) {
-                print("I did it!")
+                self.delegate?.PADataManagerDidFinishUploadingPhotographWithError(error: nil)
             }
             
         }

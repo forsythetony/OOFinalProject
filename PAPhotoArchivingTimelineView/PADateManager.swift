@@ -169,6 +169,13 @@ class PADateManager {
         return self.randomDateBetweenYears(startYear: firstDate, endYear: lastDate)
     }
     
+    func getDateFromTimeIntervalSinceDistantPast( interval : TimeInterval ) -> Date {
+        
+        let newDate = Date(timeInterval: interval, since: Date.distantPast)
+        
+        return newDate
+    }
+    
 }
 
 

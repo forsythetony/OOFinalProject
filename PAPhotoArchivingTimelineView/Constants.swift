@@ -95,6 +95,7 @@ struct Constants {
         static let FromPhotoInfoToMainImageViewer = "segueFromPhotoInfoToMainImageViewer"
         static let FromPhotoInfoToAddRecording = "SegueFromPhotoInfoToAddRecording"
         static let SegueFromRepositoriesToTimelineView = "SegueFromRepositoriesToTimelineView"
+        static let SegueFromTimelineToAddPhotograph = "SegueFromTimelineToAddPhotograph"
     }
     
     struct Timeline {

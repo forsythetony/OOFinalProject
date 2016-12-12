@@ -8,12 +8,26 @@
 
 import UIKit
 import Eureka
+import SwiftSpinner
 
+protocol PAPhotoUploadFormDelegate {
+    func PAPhotoUploadFormDidFinishUploadingPhotoWithError( error : PAPhotoUploadError?)
+    func PAPhotoUploadFormDidCancel()
+}
 class PAPhotoUploadForm : FormViewController {
     
     var photoInformation : PAPhotograph = PAPhotograph()
     
     var photoPickerController : UIImagePickerController?
+    var photoPickerChoice : UIImagePickerControllerSourceType = .photoLibrary {
+        didSet {
+            
+            guard let pickerController = self.photoPickerController else { return }
+            
+            pickerController.sourceType = self.photoPickerChoice
+        }
+    }
+    
     
     let headerImageView = UIImageView()
     
@@ -21,7 +35,20 @@ class PAPhotoUploadForm : FormViewController {
     
     let dataMan : PADataManager = PADataManager.sharedInstance
     
-    let repo = PARepository.Mock2()
+    var delegate : PAPhotoUploadFormDelegate?
+    
+    var repo : PARepository? {
+        didSet {
+            
+            //  Set the value for center date
+            if let startDate = self.repo?.startDate, let endDate = self.repo?.endDate {
+                let centerDate = startDate <-> endDate
+                
+                self.form.PAsetValueForRowWithTag(value: centerDate, rowTag: Keys.Photograph.dateTaken)
+            }
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +58,6 @@ class PAPhotoUploadForm : FormViewController {
         if !dataMan.isConfigured {
             dataMan.configure()
         }
-        
-        
         
         form = Section("Photograph") { section in
             
@@ -51,7 +76,7 @@ class PAPhotoUploadForm : FormViewController {
             
             } . onCellSelection({ (cellOf, rowOf) in
                 
-                self.displayPhotoSelector()
+                self.showPhotoOptions()
             })
         +++ Section("Basic Information")
             <<< TextRow() { row in
@@ -72,7 +97,7 @@ class PAPhotoUploadForm : FormViewController {
             <<< DateRow() { dateRow in
                     dateRow.title = "Date Taken"
                     dateRow.maximumDate = Date()
-                    dateRow.value = PADateManager.sharedInstance.randomDateBetweenYears(startYear: 1900, endYear: 2000)
+                    dateRow.value = self.getRandomDate()
                     dateRow.tag = Keys.Photograph.dateTaken
             }
             <<< SliderRow() { sRow in
@@ -92,14 +117,24 @@ class PAPhotoUploadForm : FormViewController {
             })
             <<< ButtonRow() { btnRow in
                 btnRow.title = "Cancel"
-            } .onCellSelection({ (_, _) in
-                self.didTapCancel()
-            })
+            }
         
         
         self.setupPicker()
     }
     
+    private func getRandomDate() -> Date {
+        if let repository = self.repo {
+            if let startDate = repository.startDate, let endDate = repository.endDate {
+                
+                let centerDate = startDate <-> endDate
+                
+                return centerDate
+            }
+        }
+        
+        return PADateManager.sharedInstance.randomDateBetweenYears(startYear: 1900, endYear: 2000)
+    }
     func didTapSubmit() {
         getThumbnailImages()
         updatePhotoInfo()
@@ -107,12 +142,14 @@ class PAPhotoUploadForm : FormViewController {
         let p = self.photoInformation
         
         if p.mainImage == nil {
-            self.showAlertViewWithMessage(message: "You didn't pick an image...")
+            self.PADisplayErrorAlert(message: "You didn't pick an image...")
             return
         }
         
         if dataMan.isConfigured {
-            dataMan.addPhotographToRepository(newPhoto: p, repository: repo)
+            dataMan.addPhotographToRepository(newPhoto: p, repository: repo ?? PARepository.Mock2())
+            SwiftSpinner.show("Uploading Photograph")
+            
         }
         
     }
@@ -178,6 +215,7 @@ class PAPhotoUploadForm : FormViewController {
     }
     func setupPicker() {
         
+        
         self.photoPickerController = UIImagePickerController()
         
         guard let pp = self.photoPickerController else { return }
@@ -190,9 +228,45 @@ class PAPhotoUploadForm : FormViewController {
         
         
         pp.allowsEditing = true
-        
-        
     }
+    
+    func showPhotoOptions() {
+        
+        let typePicker = UIAlertController(title: "Source Pick", message: "Pick a source", preferredStyle: .actionSheet)
+        
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { (alertAction) in
+            
+            self.photoPickerChoice = .photoLibrary
+            self.displayPhotoSelector()
+        })
+        
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { (alertAction) in
+            
+            self.photoPickerChoice = .camera
+            self.displayPhotoSelector()
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (alertAction) in
+            
+            //  Cancel
+        })
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            typePicker.addAction(photoLibraryAction)
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            typePicker.addAction(cameraAction)
+        }
+        
+        typePicker.addAction(cancelAction)
+        
+        
+        self.present(typePicker, animated: true, completion: nil)
+
+    }
+    
     func displayPhotoSelector() {
         guard let pp = self.photoPickerController else { return }
         
@@ -276,5 +350,10 @@ extension PAPhotoUploadForm : PADataManagerDelegate {
     
     func PADataManagerDidGetNewRepository(_ newRepository: PARepository) {
         
+    }
+    
+    func PADataManagerDidFinishUploadingPhotographWithError(error: PAPhotoUploadError?) {
+        SwiftSpinner.hide()
+        self.delegate?.PAPhotoUploadFormDidFinishUploadingPhotoWithError(error: error)
     }
 }
